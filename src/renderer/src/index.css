@@ -1,0 +1,173 @@
+/**
+ * Global styles
+ * Tailwind CSS with Scandinavian design system
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Inter font */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  * {
+    @apply border-gray-200;
+  }
+
+  html {
+    @apply bg-base-canvas;
+  }
+
+  body {
+    @apply bg-base-canvas font-sans text-gray-900 antialiased;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-gray-300 hover:bg-gray-400;
+  }
+
+  /* Focus visible styling */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2;
+  }
+
+  /* Selection styling */
+  ::selection {
+    @apply bg-primary-200 text-primary-900;
+  }
+}
+
+@layer components {
+  /* Prose styling for long-form content */
+  .prose {
+    @apply text-gray-800;
+  }
+
+  .prose p {
+    @apply my-4;
+  }
+
+  .prose h1 {
+    @apply text-3xl font-semibold text-gray-900;
+  }
+
+  .prose h2 {
+    @apply text-2xl font-semibold text-gray-900;
+  }
+
+  .prose h3 {
+    @apply text-xl font-semibold text-gray-900;
+  }
+
+  .prose code {
+    @apply rounded bg-gray-100 px-1 py-0.5 font-mono text-sm;
+  }
+
+  .prose pre {
+    @apply overflow-x-auto rounded-lg bg-gray-900 p-4;
+  }
+
+  .prose pre code {
+    @apply bg-transparent text-gray-100;
+  }
+
+  .prose a {
+    @apply text-primary-500 hover:underline;
+  }
+
+  .prose ul {
+    @apply list-disc pl-6;
+  }
+
+  .prose ol {
+    @apply list-decimal pl-6;
+  }
+
+  .prose li {
+    @apply my-1;
+  }
+
+  .prose blockquote {
+    @apply border-l-4 border-gray-300 pl-4 italic text-gray-700;
+  }
+}
+
+@layer utilities {
+  /* Custom animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 200ms ease-out;
+  }
+
+  .animate-pulse-custom {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+  }
+
+  .animate-slide-in {
+    animation: slideIn 200ms ease-out;
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

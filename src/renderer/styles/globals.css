@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * Perpetua Design System - Global Styles
+ * Scandinavian-inspired, minimal, functional
+ */
+
+/* Screen reader only utility */
+@layer utilities {
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+}
+
+/* Base styles */
+@layer base {
+  * {
+    @apply border-gray-200 dark:border-gray-700;
+  }
+
+  html {
+    @apply antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  body {
+    @apply bg-base-canvas text-gray-900 dark:bg-gray-900 dark:text-gray-100;
+    @apply font-sans text-base leading-normal;
+  }
+
+  /* Headings */
+  h1 {
+    @apply text-4xl font-semibold leading-tight text-gray-900 dark:text-gray-100;
+  }
+
+  h2 {
+    @apply text-3xl font-semibold leading-tight text-gray-900 dark:text-gray-100;
+  }
+
+  h3 {
+    @apply text-2xl font-semibold leading-snug text-gray-900 dark:text-gray-100;
+  }
+
+  h4 {
+    @apply text-xl font-semibold leading-snug text-gray-900 dark:text-gray-100;
+  }
+
+  h5 {
+    @apply text-lg font-semibold leading-normal text-gray-900 dark:text-gray-100;
+  }
+
+  h6 {
+    @apply text-base font-semibold leading-normal text-gray-900 dark:text-gray-100;
+  }
+
+  /* Links */
+  a {
+    @apply text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300;
+    @apply transition-colors duration-150;
+    @apply underline-offset-2;
+  }
+
+  /* Focus styles - always visible for accessibility */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2;
+    @apply ring-offset-white dark:ring-offset-gray-900;
+  }
+
+  /* Code blocks */
+  code {
+    @apply font-mono text-sm;
+    @apply bg-gray-100 dark:bg-gray-800;
+    @apply px-1.5 py-0.5 rounded;
+  }
+
+  pre code {
+    @apply bg-transparent p-0 rounded-none;
+  }
+
+  /* Selection */
+  ::selection {
+    @apply bg-primary-200 dark:bg-primary-800;
+  }
+}
+
+/* Scrollbar styling */
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.gray.300') transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: theme('colors.gray.300');
+    border-radius: 4px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: theme('colors.gray.400');
+  }
+
+  .dark .scrollbar-thin {
+    scrollbar-color: theme('colors.gray.700') transparent;
+  }
+
+  .dark .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: theme('colors.gray.700');
+  }
+
+  .dark .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: theme('colors.gray.600');
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  * {
+    border-width: 2px;
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    @apply bg-white text-black;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}

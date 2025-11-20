@@ -1,0 +1,443 @@
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                   PERPETUA OPTIMIZATION ARCHITECTURE                          ║
+║                         Journey Quality Enhancement                           ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                              USER INTERFACE                                  │
+│                                                                              │
+│  ┌────────────┐  ┌────────────┐  ┌────────────┐  ┌────────────┐           │
+│  │  Journey   │  │   Stage    │  │  Quality   │  │ Settings & │           │
+│  │   View     │  │  Stream    │  │  Metrics   │  │  Controls  │           │
+│  └────────────┘  └────────────┘  └────────────┘  └────────────┘           │
+└────────────────────────────┬────────────────────────────────────────────────┘
+                             │
+                             │ React Components + Zustand State
+                             │
+┌────────────────────────────▼────────────────────────────────────────────────┐
+│                         EXPLORATION ENGINE                                   │
+│                        (Core Orchestrator)                                   │
+│                                                                              │
+│  ┌──────────────────────────────────────────────────────────────────┐      │
+│  │  Stage Execution Pipeline                                        │      │
+│  │  • start() → discovering → chasing → ... → building             │      │
+│  │  • Streaming output to UI                                       │      │
+│  │  • Context coordination                                         │      │
+│  └──────────────────────────────────────────────────────────────────┘      │
+│                                                                              │
+│  ┌──────────────────────────────────────────────────────────────────┐      │
+│  │  Configuration & Feature Flags                                   │      │
+│  │  • OptimizationConfig                                            │      │
+│  │  • Phase 1/2/3 feature toggles                                   │      │
+│  │  • Dynamic thinking budgets                                      │      │
+│  └──────────────────────────────────────────────────────────────────┘      │
+└────────────┬────────────────────────┬────────────────────────┬─────────────┘
+             │                        │                        │
+             │                        │                        │
+┌────────────▼──────────┐  ┌─────────▼──────────┐  ┌─────────▼──────────┐
+│                       │  │                     │  │                     │
+│  CONTEXT MANAGER      │  │   STAGE EXECUTOR    │  │  QUALITY MANAGER    │
+│                       │  │                     │  │                     │
+│  ┌─────────────────┐  │  │  ┌──────────────┐  │  │  ┌──────────────┐  │
+│  │ Context Storage │  │  │  │ Prompt       │  │  │  │ Quality      │  │
+│  │ • Rich insights │  │  │  │ Adaptation   │  │  │  │ Scoring      │  │
+│  │ • Questions     │  │  │  │              │  │  │  │              │  │
+│  │ • Artifacts     │  │  │  │ • Inject     │  │  │  │ • Evaluate   │  │
+│  │ • Metadata      │  │  │  │   context    │  │  │  │   stage      │  │
+│  └─────────────────┘  │  │  │ • Dynamic    │  │  │  │ • Generate   │  │
+│                       │  │  │   summaries  │  │  │  │   report     │  │
+│  ┌─────────────────┐  │  │  └──────────────┘  │  │  │ • Revision   │  │
+│  │ Summarization   │  │  │                     │  │  │   logic      │  │
+│  │ • Overall       │  │  │  ┌──────────────┐  │  │  └──────────────┘  │
+│  │ • Clusters      │  │  │  │ Claude API   │  │  │                     │
+│  │ • Key insights  │  │  │  │ Integration  │  │  │  ┌──────────────┐  │
+│  │ • Questions     │  │  │  │              │  │  │  │ Adaptive     │  │
+│  └─────────────────┘  │  │  │ • Stream     │  │  │  │ Intelligence │  │
+│                       │  │  │ • Extended   │  │  │  │              │  │
+│  ┌─────────────────┐  │  │  │   thinking   │  │  │  │ • Topic type │  │
+│  │ Mini-Synthesis  │  │  │  │ • Model      │  │  │  │ • Sequence   │  │
+│  │ • Every 3       │  │  │  │   selection  │  │  │  │   selection  │  │
+│  │   stages        │  │  │  └──────────────┘  │  │  │ • Budget     │  │
+│  │ • Connections   │  │  │                     │  │  │   allocation │  │
+│  │ • Patterns      │  │  └─────────────────────┘  │  └──────────────┘  │
+│  └─────────────────┘  │                           │                     │
+│                       │                           └─────────────────────┘
+└───────────┬───────────┘
+            │
+            │
+┌───────────▼────────────────────────────────────────────────────────────────┐
+│                         OPTIMIZATION SERVICES                                │
+│                      (12 Modular Components)                                 │
+│                                                                              │
+│  ┌──────────────────────────────────────────────────────────────────────┐  │
+│  │                         PHASE 1: QUICK WINS                          │  │
+│  │                                                                      │  │
+│  │  ┌─────────────────┐  ┌─────────────────┐  ┌────────────────────┐  │  │
+│  │  │   Insight       │  │   Question      │  │   Artifact         │  │  │
+│  │  │   Extraction    │  │   Tracking      │  │   Validation       │  │  │
+│  │  │                 │  │                 │  │                    │  │  │
+│  │  │ • Claude-based  │  │ • Extract Q's   │  │ • Claude extract   │  │  │
+│  │  │   structured    │  │ • Track status  │  │ • Validate syntax  │  │  │
+│  │  │   extraction    │  │ • Match answers │  │ • Assess complete  │  │  │
+│  │  │ • Categorize    │  │ • Prioritize    │  │ • Rich metadata    │  │  │
+│  │  │ • Enrich meta   │  │ • Update state  │  │ • Link insights    │  │  │
+│  │  │ • Pattern fall  │  │                 │  │                    │  │  │
+│  │  │   back          │  │ Q: unanswered   │  │ Code → Validate    │  │  │
+│  │  │                 │  │ Q: partial      │  │ Text → Assess      │  │  │
+│  │  │ String →        │  │ Q: answered     │  │ Diagram → Parse    │  │  │
+│  │  │ RichInsight     │  │ Q: obsolete     │  │                    │  │  │
+│  │  └─────────────────┘  └─────────────────┘  └────────────────────┘  │  │
+│  │                                                                      │  │
+│  │  ┌─────────────────┐                      ┌────────────────────┐  │  │
+│  │  │ Mini-Synthesis  │                      │   Dynamic          │  │  │
+│  │  │                 │                      │   Thinking         │  │  │
+│  │  │ • Every 3       │                      │   Budgets          │  │  │
+│  │  │   stages        │                      │                    │  │  │
+│  │  │ • Connections   │                      │ discovering: 12k   │  │  │
+│  │  │ • Patterns      │                      │ chasing: 8k        │  │  │
+│  │  │ • Contradicts   │                      │ solving: 15k       │  │  │
+│  │  │ • Forward look  │                      │ challenging: 14k   │  │  │
+│  │  │                 │                      │ questioning: 6k    │  │  │
+│  │  │ Stages 1-3 →    │                      │ searching: 8k      │  │  │
+│  │  │ Synthesis       │                      │ imagining: 12k     │  │  │
+│  │  └─────────────────┘                      │ building: 15k      │  │  │
+│  │                                            └────────────────────┘  │  │
+│  └──────────────────────────────────────────────────────────────────────┘  │
+│                                                                              │
+│  ┌──────────────────────────────────────────────────────────────────────┐  │
+│  │                      PHASE 2: INTELLIGENCE                           │  │
+│  │                                                                      │  │
+│  │  ┌─────────────────┐  ┌─────────────────┐  ┌────────────────────┐  │  │
+│  │  │   Context       │  │   Quality       │  │   Adaptive Stage   │  │  │
+│  │  │   Summarize     │  │   Scoring       │  │   Selection        │  │  │
+│  │  │                 │  │                 │  │                    │  │  │
+│  │  │ • Overall       │  │ • Completeness  │  │ • Detect topic     │  │  │
+│  │  │   summary       │  │ • Depth         │  │   type             │  │  │
+│  │  │ • Stage         │  │ • Specificity   │  │ • Customize        │  │  │
+│  │  │   clusters      │  │ • Actionability │  │   sequence         │  │  │
+│  │  │ • Key insights  │  │ • Coherence     │  │ • Budget per       │  │  │
+│  │  │ • Critical Q's  │  │ • Novelty       │  │   topic            │  │  │
+│  │  │ • Patterns      │  │                 │  │                    │  │  │
+│  │  │ • Contradicts   │  │ Overall: 0-10   │  │ research →         │  │  │
+│  │  │                 │  │ Threshold: 6    │  │   more search      │  │  │
+│  │  │ Full context →  │  │                 │  │ technical →        │  │  │
+│  │  │ 2000-3000 tok   │  │ Low? → Revise   │  │   more build       │  │  │
+│  │  └─────────────────┘  └─────────────────┘  └────────────────────┘  │  │
+│  │                                                                      │  │
+│  │  ┌─────────────────┐                                                │  │
+│  │  │  Confidence     │                                                │  │
+│  │  │  Tracking       │                                                │  │
+│  │  │                 │                                                │  │
+│  │  │ • Assess conf   │                                                │  │
+│  │  │ • Track assume  │                                                │  │
+│  │  │ • Flag low      │                                                │  │
+│  │  │ • Revisit       │                                                │  │
+│  │  │ • Update        │                                                │  │
+│  │  │                 │                                                │  │
+│  │  │ verified        │                                                │  │
+│  │  │ high            │                                                │  │
+│  │  │ medium          │                                                │  │
+│  │  │ low             │                                                │  │
+│  │  │ speculative     │                                                │  │
+│  │  └─────────────────┘                                                │  │
+│  └──────────────────────────────────────────────────────────────────────┘  │
+│                                                                              │
+│  ┌──────────────────────────────────────────────────────────────────────┐  │
+│  │                      PHASE 3: ADVANCED                               │  │
+│  │                     (Future / Long-term)                             │  │
+│  │                                                                      │  │
+│  │  ┌─────────────────┐  ┌─────────────────┐  ┌────────────────────┐  │  │
+│  │  │   Semantic      │  │   Multi-Agent   │  │   Pattern          │  │  │
+│  │  │   Search        │  │   Validation    │  │   Learning         │  │  │
+│  │  │                 │  │                 │  │                    │  │  │
+│  │  │ • Embeddings    │  │ • Optimistic    │  │ • Record success   │  │  │
+│  │  │ • Vector DB     │  │ • Skeptical     │  │ • Extract patterns │  │  │
+│  │  │ • Cosine sim    │  │ • Pragmatic     │  │ • Learn from       │  │  │
+│  │  │ • Top-K         │  │ • Consensus     │  │   feedback         │  │  │
+│  │  │ • Cache         │  │ • Synthesis     │  │ • Suggest improve  │  │  │
+│  │  │                 │  │                 │  │                    │  │  │
+│  │  │ Query →         │  │ 3 parallel →    │  │ Journey success →  │  │  │
+│  │  │ Relevant stages │  │ Balanced view   │  │ Best practices     │  │  │
+│  │  └─────────────────┘  └─────────────────┘  └────────────────────┘  │  │
+│  └──────────────────────────────────────────────────────────────────────┘  │
+└────────────────────────────┬─────────────────────────────────────────────────┘
+                             │
+┌────────────────────────────▼─────────────────────────────────────────────────┐
+│                        DATA PERSISTENCE LAYER                                 │
+│                                                                               │
+│  ┌────────────────────┐  ┌────────────────────┐  ┌──────────────────────┐  │
+│  │   SQLite DB        │  │   IPC Bridge       │  │   Zustand Store      │  │
+│  │                    │  │   (Main ↔ Render)  │  │   (UI State)         │  │
+│  │ • journeys         │  │                    │  │                      │  │
+│  │ • stages           │  │ • journey:create   │  │ • currentJourney     │  │
+│  │ • rich_insights    │  │ • stage:list       │  │ • activeStage        │  │
+│  │ • tracked_questions│  │ • settings:get     │  │ • settings           │  │
+│  │ • artifacts        │  │                    │  │ • sidebarOpen        │  │
+│  │ • pages            │  │ Context versioning │  │                      │  │
+│  │                    │  │ & migration        │  │ Real-time updates    │  │
+│  └────────────────────┘  └────────────────────┘  └──────────────────────┘  │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                           DATA FLOW SEQUENCE                                  ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+
+[1] User Input: "Explore quantum computing applications"
+        │
+        ▼
+[2] ExplorationEngine.start(input)
+        │
+        ├─→ Adaptive Stage Service
+        │   └─→ Detect topic type: "research"
+        │       └─→ Select sequence: [discovering, searching, questioning, ...]
+        │
+        ├─→ Context Manager
+        │   └─→ Create EnhancedExplorationContext
+        │       └─→ Initialize tracking arrays
+        │
+        ▼
+[3] Execute Stage: DISCOVERING
+        │
+        ├─→ Prompt Adaptation Service
+        │   └─→ Build adaptive prompt
+        │       ├─→ Inject context summary (if available)
+        │       ├─→ Add unanswered questions
+        │       └─→ Include quality feedback
+        │
+        ├─→ Claude Service
+        │   └─→ Execute with streaming
+        │       ├─→ Model: claude-sonnet-4-5-20250929
+        │       ├─→ Thinking budget: 12000 tokens
+        │       ├─→ Extended thinking: enabled
+        │       └─→ Stream chunks to UI
+        │
+        ▼
+[4] Process Output
+        │
+        ├─→ Insight Extraction Service
+        │   └─→ Extract structured insights
+        │       ├─→ Use Claude for intelligent extraction
+        │       ├─→ Categorize: discovery, problem, solution, etc.
+        │       ├─→ Assess importance: critical, high, medium, low
+        │       ├─→ Extract evidence
+        │       └─→ Store as RichInsight[]
+        │
+        ├─→ Quality Scoring Service
+        │   └─→ Evaluate stage quality
+        │       ├─→ Score: completeness, depth, specificity, etc.
+        │       ├─→ Overall: 8.2/10
+        │       ├─→ Strengths: ["Good examples", "Clear structure"]
+        │       ├─→ Should revise? No
+        │       └─→ Store QualityReport
+        │
+        ├─→ Context Manager
+        │   └─→ Update context
+        │       ├─→ Add insights
+        │       ├─→ Add quality report
+        │       └─→ Update metrics
+        │
+        └─→ Persist to database
+            └─→ Save stage, insights, quality report
+        │
+        ▼
+[5] Check: Mini-Synthesis Needed?
+        │
+        └─→ If stagesCompleted % 3 === 0
+            │
+            └─→ Mini-Synthesis Service
+                └─→ Synthesize last 3 stages
+                    ├─→ Key connections
+                    ├─→ Emerging patterns
+                    ├─→ Contradictions
+                    └─→ Forward look
+        │
+        ▼
+[6] Next Stage: CHASING
+        │
+        └─→ [Repeat steps 3-5]
+        │
+        ▼
+[7] Stage: QUESTIONING
+        │
+        └─→ Question Tracking Service
+            └─→ Extract questions
+                ├─→ Categorize: clarifying, probing, etc.
+                ├─→ Prioritize: critical, high, medium, low
+                ├─→ Status: unanswered
+                └─→ Store as TrackedQuestion[]
+        │
+        ▼
+[8] Stage: SEARCHING
+        │
+        ├─→ Prompt includes unanswered questions
+        │
+        └─→ Question Tracking Service
+            └─→ Match answers to questions
+                ├─→ Find Q&A pairs in output
+                ├─→ Update status: answered
+                ├─→ Add answer, evidence, confidence
+                └─→ Update TrackedQuestion
+        │
+        ▼
+[9] Continue through stages...
+        │
+        ▼
+[10] Stage: BUILDING
+        │
+        └─→ Artifact Validation Service
+            └─→ Extract and validate artifacts
+                ├─→ Use Claude for extraction
+                ├─→ Detect type: code, markdown, diagram, etc.
+                ├─→ Validate syntax (for code)
+                ├─→ Assess completeness
+                ├─→ Link to insights/questions
+                └─→ Store as RichArtifact[]
+        │
+        ▼
+[11] Final Stage: SUMMARY
+        │
+        └─→ Context Summarization Service
+            └─→ Create comprehensive summary
+                ├─→ Overall journey summary
+                ├─→ Key findings (synthesize all insights)
+                ├─→ Critical questions addressed
+                ├─→ Recommendations & next steps
+                ├─→ Artifacts created
+                └─→ Further exploration areas
+        │
+        ▼
+[12] Journey Complete
+        │
+        ├─→ Mark status: complete
+        ├─→ Generate metrics report
+        └─→ Display to user
+
+
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                          OPTIMIZATION IMPACT                                  ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                            BASELINE vs OPTIMIZED                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+Metric                    │ Baseline  │ Phase 1   │ Phase 2   │ Phase 3
+──────────────────────────┼───────────┼───────────┼───────────┼──────────
+Insights extracted        │   10-15   │   25-40   │   30-50   │   35-60
+Insight accuracy          │    60%    │    85%    │    90%    │    95%
+Questions tracked         │     0     │   15-25   │   20-30   │   25-40
+Questions answered        │    40%    │    70%    │    85%    │    90%
+Artifact quality          │   6/10    │   7.5/10  │   8/10    │   8.5/10
+Context awareness         │ Last 2-3  │ Last 2-3  │ Full +    │ Full +
+                          │  stages   │ + synthesis│ summary  │ semantic
+Quality scoring           │    No     │    No     │   Yes     │    Yes
+Adaptive stages           │    No     │    No     │   Yes     │    Yes
+Confidence tracking       │    No     │    No     │   Yes     │    Yes
+Semantic search           │    No     │    No     │    No     │    Yes
+Multi-agent validation    │    No     │    No     │    No     │    Yes
+Pattern learning          │    No     │    No     │    No     │    Yes
+──────────────────────────┼───────────┼───────────┼───────────┼──────────
+Overall improvement       │ Baseline  │   +30%    │   +50%    │   +65%
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         IMPLEMENTATION TIMELINE                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+Week 1: Phase 1 - Quick Wins (10 hours)
+├─ Day 1-2: Insight Extraction Service (2h)
+├─ Day 2-3: Question Tracking Service (2h)
+├─ Day 3-4: Mini-Synthesis Service (2h)
+├─ Day 4: Dynamic Thinking Budgets (15min)
+├─ Day 4-5: Artifact Validation Service (3h)
+└─ Day 5: Testing & Integration (1h)
+    └─→ Expected: +30% improvement
+
+Week 2-3: Phase 2 - Intelligence (26 hours)
+├─ Week 2: Context Summarization Service (8h)
+├─ Week 2: Quality Scoring Service (5h)
+├─ Week 3: Adaptive Stage Service (7h)
+├─ Week 3: Confidence Tracking Service (4h)
+└─ Week 3: Testing & Integration (2h)
+    └─→ Expected: +50% improvement (cumulative)
+
+Week 4-9: Phase 3 - Advanced (5 weeks)
+├─ Week 4-5: Semantic Search (2 weeks)
+├─ Week 6: Multi-Agent Validation (1 week)
+└─ Week 7-9: Pattern Learning (2 weeks)
+    └─→ Expected: +65% improvement (cumulative)
+
+
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                         BACKWARDS COMPATIBILITY                               ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+
+Old Context (v1)                      New Context (v2)
+┌────────────────────┐                ┌────────────────────────────┐
+│ insights: string[] │───Migration───▶│ insights: RichInsight[]    │
+│ questions: string[]│───────────────▶│ questions: TrackedQuestion│
+│ artifacts: string[]│───────────────▶│ artifacts: RichArtifact[]  │
+│                    │                │                            │
+│                    │                │ + contextSummary           │
+│                    │                │ + miniSyntheses            │
+│                    │                │ + qualityReports           │
+│                    │                │ + topicType                │
+│                    │                │ + metrics                  │
+│                    │                │ + version: 2               │
+└────────────────────┘                └────────────────────────────┘
+
+Migration Strategy:
+1. Auto-detect old format (no version field or version < 2)
+2. Convert simple arrays to rich objects with minimal metadata
+3. Initialize new fields with defaults
+4. All features gracefully handle both formats
+5. No user action required
+
+
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                            FEATURE FLAGS                                      ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+
+OptimizationConfig {
+  Phase 1: Quick Wins
+  ├─ enableStructuredInsights: true     [✓ Standalone]
+  ├─ enableQuestionTracking: true       [✓ Standalone]
+  ├─ enableMiniSynthesis: true          [→ Requires: insights]
+  ├─ enableDynamicBudgets: true         [✓ Standalone]
+  └─ enableArtifactValidation: true     [✓ Standalone]
+
+  Phase 2: Intelligence
+  ├─ enableContextSummary: false        [→ Requires: Phase 1]
+  ├─ enableQualityScoring: false        [→ Requires: Phase 1]
+  ├─ enableAdaptiveStages: false        [→ Requires: Phase 1 + quality]
+  └─ enableConfidenceTracking: false    [→ Requires: Phase 1]
+
+  Phase 3: Advanced
+  ├─ enableSemanticSearch: false        [→ Requires: embeddings, Phase 1]
+  ├─ enableMultiAgentValidation: false  [→ Requires: Phase 1 & 2]
+  └─ enablePatternLearning: false       [→ Requires: analytics DB, all]
+
+  Thresholds
+  ├─ qualityThreshold: 6.0
+  ├─ synthesisInterval: 3
+  └─ confidenceMinimum: 'medium'
+}
+
+Enable progressively:
+  Start → Phase 1 all enabled → Test → Phase 2 enabled → Test → Phase 3
+
+
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                                END                                            ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+
+Architecture Version: 1.0.0
+Last Updated: October 30, 2025
+Status: Ready for Implementation
+
+Related Documentation:
+- docs/JOURNEY-OPTIMIZATION-ANALYSIS.md
+- docs/OPTIMIZATION-ARCHITECTURE.md
+- src/renderer/lib/engine/types/optimization-types.ts
+- src/renderer/lib/engine/ExplorationEngine.ts

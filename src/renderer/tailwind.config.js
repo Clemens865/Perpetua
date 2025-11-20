@@ -1,0 +1,155 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        // Base colors
+        base: {
+          white: '#FAFAFA',
+          canvas: '#F5F5F5',
+          paper: '#FFFFFF',
+        },
+        // Neutrals - Scandinavian grays
+        gray: {
+          50: '#F7F7F7',
+          100: '#EFEFEF',
+          200: '#E1E1E1',
+          300: '#CFCFCF',
+          400: '#B1B1B1',
+          500: '#9E9E9E',
+          600: '#7E7E7E',
+          700: '#626262',
+          800: '#515151',
+          900: '#3B3B3B',
+        },
+        // Primary - Nordic blue
+        primary: {
+          50: '#F0F7FF',
+          100: '#E0EFFF',
+          200: '#B8DBFF',
+          300: '#8AC4FF',
+          400: '#5CADFF',
+          500: '#2E96FF',
+          600: '#1E7FE0',
+          700: '#1565C0',
+          800: '#0D4A8F',
+          900: '#062E5F',
+        },
+        // Secondary - Soft green
+        secondary: {
+          50: '#F0FDF4',
+          100: '#DCFCE7',
+          200: '#BBF7D0',
+          300: '#86EFAC',
+          400: '#4ADE80',
+          500: '#22C55E',
+          600: '#16A34A',
+          700: '#15803D',
+          800: '#166534',
+          900: '#14532D',
+        },
+        // Accent - Warm amber
+        accent: {
+          50: '#FFFBEB',
+          100: '#FEF3C7',
+          200: '#FDE68A',
+          300: '#FCD34D',
+          400: '#FBBF24',
+          500: '#F59E0B',
+          600: '#D97706',
+          700: '#B45309',
+          800: '#92400E',
+          900: '#78350F',
+        },
+        // Semantic colors
+        success: '#22C55E',
+        warning: '#F59E0B',
+        error: '#EF4444',
+        info: '#2E96FF',
+        // Stage-specific colors
+        stages: {
+          discovering: '#2E96FF',
+          chasing: '#8B5CF6',
+          solving: '#22C55E',
+          challenging: '#EF4444',
+          questioning: '#F59E0B',
+          searching: '#06B6D4',
+          imagining: '#EC4899',
+          building: '#6366F1',
+        },
+      },
+      fontFamily: {
+        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        mono: ['JetBrains Mono', 'Fira Code', 'Monaco', 'Courier New', 'monospace'],
+      },
+      fontSize: {
+        xs: ['0.75rem', { lineHeight: '1.5' }],
+        sm: ['0.875rem', { lineHeight: '1.5' }],
+        base: ['1rem', { lineHeight: '1.5' }],
+        lg: ['1.125rem', { lineHeight: '1.5' }],
+        xl: ['1.25rem', { lineHeight: '1.5' }],
+        '2xl': ['1.5rem', { lineHeight: '1.25' }],
+        '3xl': ['1.875rem', { lineHeight: '1.25' }],
+        '4xl': ['2.25rem', { lineHeight: '1.25' }],
+        '5xl': ['3rem', { lineHeight: '1.25' }],
+      },
+      spacing: {
+        0: '0',
+        1: '4px',
+        2: '8px',
+        3: '12px',
+        4: '16px',
+        5: '20px',
+        6: '24px',
+        8: '32px',
+        10: '40px',
+        12: '48px',
+        16: '64px',
+        20: '80px',
+        24: '96px',
+        32: '128px',
+      },
+      borderRadius: {
+        none: '0',
+        sm: '4px',
+        DEFAULT: '8px',
+        lg: '12px',
+        xl: '16px',
+        full: '9999px',
+      },
+      boxShadow: {
+        sm: '0 1px 2px rgba(0, 0, 0, 0.04)',
+        DEFAULT: '0 1px 3px rgba(0, 0, 0, 0.1)',
+        md: '0 4px 6px rgba(0, 0, 0, 0.07)',
+        lg: '0 10px 15px rgba(0, 0, 0, 0.1)',
+        xl: '0 20px 25px rgba(0, 0, 0, 0.1)',
+      },
+      animation: {
+        'fade-in': 'fadeIn 200ms ease-out',
+        pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        shimmer: 'shimmer 2s infinite',
+        'slide-in': 'slideIn 200ms ease-out',
+      },
+      keyframes: {
+        fadeIn: {
+          from: { opacity: '0', transform: 'translateY(8px)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
+        },
+        pulse: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.6' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-1000px 0' },
+          '100%': { backgroundPosition: '1000px 0' },
+        },
+        slideIn: {
+          from: { transform: 'translateX(100%)' },
+          to: { transform: 'translateX(0)' },
+        },
+      },
+    },
+  },
+  plugins: [],
+};
